@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { NavLink } from 'react-router-dom';
+import LogoutButton from './LogoutButton.react';
 
 class Navbar extends Component{
   render(){
@@ -26,10 +27,7 @@ class Navbar extends Component{
             </NavLink></li>
           </ul>
 
-          <div class="logout">
-            <p>Forename Surname</p>
-            <img alt="" src=""/>
-          </div>
+          <LogoutButton/>
 
         </div>
       </nav>

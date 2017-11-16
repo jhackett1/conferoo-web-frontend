@@ -1,25 +1,19 @@
 @import 'variables.sass'
 
-// Entrance animation for list items
-@keyframes fadeInUp
-  0%
-    transform: translateY(20px)
-    opacity: 0
-  100%
-    transform: translateY(0px)
-    opacity: 1
-
 // News item list
 ul.news-item-list
   margin: 10px
   list-style-type: none
   li.news-item
     margin-bottom: 10px
-    background-color: $grey1
+    // background-color: $grey1
     cursor: pointer
     animation: fadeInUp 0.2s ease-out
     animation-fill-mode: forwards
     opacity: 0
+    overflow: hidden
+    border-radius: 4px
+    border: 1px solid $grey2
     div.poster
       height: 200px
       position: relative
@@ -34,19 +28,16 @@ ul.news-item-list
         right: 0
         background: linear-gradient(to top, rgba(0,0,0,0.9), rgba(0,0,0,0))
         z-index: 1
-      h3
-        margin: 15px
-        position: absolute
-        bottom: 0px
-        left: 0px
-        font-size: 1.4em
-        color: $white
-        z-index: 2
-        font-weight: 400
+    h3
+      padding: 15px 15px 0px 15px
+      font-size: 1.4em
+      color: $grey4
+      z-index: 2
+      // font-weight: 400
     p
       color: $grey3
-      padding: 15px
-      font-size: 0.9em
+      padding: 5px 15px 15px 15px
+      font-size: 0.8em
 
 @keyframes slideIn
   0%
@@ -61,9 +52,69 @@ article.single-update
   z-index: 10
   position: fixed
   overflow: hidden
+  display: flex
+  flex-direction: column
   top: 0
-  animation: slideIn 0.4s cubic-bezier(.56,.01,.53,1)
-  box-shadow: 0px 0px 10px rgba(0,0,0,0.4)
+  animation: slideIn 0.5s cubic-bezier(.56,.01,.53,1)
+  box-shadow: 0px 0px 10px rgba(0,0,0,0.6)
+  div.header
+    height: 50px
+    background: $white
+    border-bottom: 1px solid $grey2
+    display: flex
+    flex-direction: row
+    justify-content: flex-start
+    align-items: center
+    color: $grey3
+    i
+      font-size: 130%
+      color: $grey3
+      margin: 15px
+      cursor: pointer
+  div.scrollable-view
+    overflow-y: scroll
+    height: 100%
+    img.poster
+      width: 100%
+      height: 300px
+      object-fit: cover
+    div.meta
+      padding: 15px
+      h1
+        color: $grey5
+        margin: 5px 0px
+      h5
+        color: $grey3
+        font-weight: 100
+    div.body-content
+      padding: 15px
+      p
+        margin-bottom: 20px
+        color: $grey4
+        a
+          color: $blue
+          text-decoration: none
+          &:hover
+            text-decoration: underline
+
+
+@media screen and (min-width: 500px)
+  article.single-update
+    div.scrollable-view
+      overflow-y: scroll
+      height: 100%
+      img.poster
+        height: 400px
+      div.meta
+        margin: 15px auto
+        max-width: 500px
+        h1
+          font-size: 2em
+        h5
+          font-size: 0.9em
+      div.body-content
+        margin: 0px auto
+        max-width: 500px
 
 @media screen and (min-width: 700px)
 
@@ -91,15 +142,20 @@ article.single-update
           right: 0
           background: linear-gradient(to top, rgba(0,0,0,0.9), rgba(0,0,0,0))
           z-index: 1
-        h3
-          margin: 15px
-          position: absolute
-          bottom: 0px
-          left: 0px
-          font-size: 1.4em
-          color: $white
-          z-index: 2
-      p
-        color: $grey3
-        padding: 15px
-        font-size: 0.9em
+
+  article.single-update
+    div.scrollable-view
+      overflow-y: scroll
+      height: 100%
+      img.poster
+        height: 500px
+      div.meta
+        max-width: 700px
+        h1
+          font-size: 3em
+        h5
+          font-size: 1em
+      div.body-content
+        max-width: 700px
+        p
+          font-size: 1.1em

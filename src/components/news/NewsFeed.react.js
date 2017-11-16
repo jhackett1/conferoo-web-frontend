@@ -1,35 +1,37 @@
 import React, { Component } from 'react';
-import updatesApi from '../../services/updatesApi';
 import Spinner from '../partials/Spinner.react';
-import SingleNews from './SingleNews.react';
+import SingleNewsMobile from './SingleNewsMobile.react';
 import '../../styles/news.css';
+
+// Flux stuff
+import newsStore from '../../stores/NewsStore';
+import * as newsActions from '../../actions/newsActions';
 
 class NewsFeed extends Component{
   constructor(){
     super();
     // Initialise state
     this.state = {
-      news: [],
-      spinner: true,
+      news: newsStore.getAll(),
+      loading: newsStore.getLoading(),
       singleNews: {}
     }
+  }
+
+  // Load list of updates from server
+  componentWillMount(){
+    newsStore.on('change', ()=>{
+      this.setState({
+        news: newsStore.getAll(),
+        loading: newsStore.getLoading()
+      })
+    })
   }
 
   // Method to close single article view
   closeSingleView = () => {
     this.setState({
       singleNews: {}
-    })
-  }
-
-  // Load list of updates from server
-  componentWillMount(){
-    updatesApi.getUpdates((err, response)=>{
-      if(err) console.log(err);
-      this.setState({
-        news: response,
-        spinner: false
-      })
     })
   }
 
@@ -46,20 +48,32 @@ class NewsFeed extends Component{
           });
         }}>
           <div className="poster" style={{backgroundImage: image}}>
-            <h3>{newsItem.title}</h3>
           </div>
+          <h3>{newsItem.title}</h3>
           <p>{newsItem.teaser}</p>
         </li>
       )
     })
 
+    const Single = () => {
+      if(this.state.singleNews.content){
+        return(
+          <SingleNewsMobile key="2" update={this.state.singleNews} close={this.closeSingleView}/>
+        )
+      } else {
+        return null;
+      }
+    }
+
     return(
       <div>
-        <ul className="news-item-list">
-          <Spinner isLoading={this.state.spinner}/>
-          {NewsList}
-        </ul>
-        <SingleNews update={this.state.singleNews} close={this.closeSingleView}/>
+        <div className="container">
+          <ul className="news-item-list">
+            {NewsList}
+          </ul>
+        </div>
+        <Spinner isLoading={this.state.loading}/>
+        <Single />
       </div>
     )
   }

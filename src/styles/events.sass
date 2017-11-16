@@ -1,0 +1,170 @@
+@import 'variables.sass'
+
+div.onboarding-message
+  margin: 50px auto
+  text-align: center
+  color: $grey3
+  padding: 40px
+
+ul.sub-nav
+  display: flex
+  flex-direction: row
+  align-items: center
+  justify-content: space-around
+  list-style-type: none
+  border-bottom: 1px solid $grey2
+  a
+    text-align: center
+    color: $grey3
+    font-size: 0.9em
+    padding: 15px
+    cursor: pointer
+    height: 50px
+    flex: 1
+    transition: 0.1s ease-in
+    border-bottom: 0px solid $blue
+    text-decoration: none
+    &.active
+      color: $blue
+      border-bottom: 3px solid $blue
+
+ul.event-filters
+  display: flex
+  flex-direction: row
+  justify-content: flex-end
+  list-style-type: none
+  margin: 15px
+  li
+    margin-left: 15px
+    font-size: 0.9em
+    color: $grey3
+    i
+      margin-right: 5px
+    select option
+      color: $grey3 !important
+
+ul.event-items-list
+  margin: 10px
+  span.time-label
+    color: $grey3
+    font-size: 0.9em
+    margin-bottom: 10px
+    display: inline-block
+  li
+    margin-bottom: 10px
+    display: flex
+    flex-direction: row
+    border: 1px solid $grey2
+    border-radius: 4px
+    overflow: hidden
+    animation: fadeInUp 0.2s ease-out
+    animation-fill-mode: forwards
+    cursor: pointer
+    opacity: 0
+    position: relative
+    div
+      padding: 15px
+      h5
+        color: $blue
+        font-weight: 100
+      h3
+        color: $grey4
+        margin: 5px 0px
+      p
+        color: $grey3
+        font-size: 0.9em
+      span.agenda-btn
+        position: absolute
+        right: 10px
+        bottom: 10px
+        width: 25px
+        height: 25px
+        display: flex
+        justify-content: center
+        align-items: center
+        border-radius: 50px
+        border: 1px solid $blue
+        color: $blue
+        &::after
+          content: "+"
+        &.attending
+          background-color: $blue
+          color: $white
+          &::after
+            content: "-"
+
+article.single-event
+  width: 100%
+  height: 100vh
+  background-color: #ffffff
+  z-index: 10
+  position: fixed
+  overflow: hidden
+  display: flex
+  flex-direction: column
+  top: 0
+  left: 0
+  animation: slideIn 0.5s cubic-bezier(.56,.01,.53,1)
+  box-shadow: 0px 0px 10px rgba(0,0,0,0.6)
+  div.header
+    height: 50px
+    background: $white
+    border-bottom: 1px solid $grey2
+    display: flex
+    flex-direction: row
+    justify-content: flex-start
+    align-items: center
+    color: $grey3
+    i
+      font-size: 130%
+      color: $grey3
+      margin: 15px
+      cursor: pointer
+  div.scrollable-view
+    overflow-y: scroll
+    height: 100%
+    img.poster
+      width: 100%
+      height: 300px
+      object-fit: cover
+    div.meta
+      padding: 15px
+      max-width: 800px
+      margin: 0px auto
+      h1
+        color: $grey5
+        margin: 5px 0px
+      h5
+        color: $grey3
+        font-weight: 100
+    a.agenda-btn
+      padding: 15px
+      // background-color: $blue
+      border-radius: 4px
+      border: 1px solid $blue
+      color: $blue
+      margin: 15px
+      display: inline-block
+    div.body-content
+      padding: 15px
+      max-width: 800px
+      margin: 0px auto
+      p
+        margin-bottom: 20px
+        color: $grey4
+        a
+          color: $blue
+          text-decoration: none
+          &:hover
+            text-decoration: underline
+
+
+@media screen and (min-width: 500px)
+  ul.sub-nav
+    margin-top: 30px
+    justify-content: flex-start
+    li
+      flex: inherit
+
+  ul.event-items-list
+    margin: 40px 0px

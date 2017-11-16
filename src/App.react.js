@@ -15,7 +15,21 @@ import LoginCallback from './components/login/LoginCallback.react';
 // Get partials
 import Navbar from './components/partials/Navbar.react';
 
+// Flux
+import * as newsActions from './actions/newsActions';
+import * as eventsActions from './actions/eventsActions';
+import * as infoActions from './actions/infoActions';
+
 class App extends Component {
+
+  // Load in data on initial application load
+  componentWillMount(){
+    newsActions.fetchNews();
+    eventsActions.fetchEvents();
+    eventsActions.fetchAgenda();
+    infoActions.fetchInfo();
+  }
+
   render() {
     return (
       <Router>
@@ -29,12 +43,10 @@ class App extends Component {
           <div className="app">
             <Navbar/>
             <div className="view-container">
-              <div className="container">
                 <Route exact path="/" component={NewsFeed}/>
                 <Route path="/events" component={Events}/>
                 <Route path="/polls" component={Polls}/>
                 <Route path="/info" component={Info}/>
-              </div>
             </div>
           </div>
 

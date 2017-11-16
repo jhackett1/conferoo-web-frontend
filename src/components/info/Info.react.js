@@ -3,17 +3,23 @@ import { withRouter } from 'react-router-dom';
 import userService from '../../services/userService';
 import '../../styles/info.css';
 
+// Flux stuff
+import infoStore from '../../stores/InfoStore';
+import * as infoActions from '../../actions/infoActions';
+
 class Info extends Component {
   constructor(){
     super();
     this.state = {
-      profile: {}
+      pages: infoStore.getAll()
     }
   }
 
   componentWillMount(){
-    this.setState({
-      profile: userService.getProfile()
+    infoStore.on('change', ()=>{
+      this.setState({
+        pages: infoStore.getAll()
+      })
     })
   }
 
@@ -29,31 +35,29 @@ class Info extends Component {
     const UserProfile = () => (
       <div className="user-profile">
         <div>
-          <h5>{this.state.profile.displayname}</h5>
-          <p>{this.state.profile.email}</p>
+          <h5>{this.props.profile.displayname}</h5>
+          <p>{this.props.profile.email}</p>
         </div>
-        <img src={this.state.profile.image ? this.state.profile.image : '/user.png'}/>
+        <img src={this.props.profile.image ? this.props.profile.image : '/user.png'}/>
       </div>
     );
 
+    const PageList = this.state.pages.map((pageItem, i)=>{
+      return(
+          <li key={pageItem._id}>
+            <div>
+              <h5>{pageItem.title}</h5>
+            </div>
+          </li>
+      )
+    })
+
     return (
-      <div>
+      <div className="container">
         <ul className="info-list">
-          <UserProfile/>
+
           <LogOut/>
-          <li>
-            <h5>Install this app</h5>
-            <p>You can install this app to use it offline.</p>
-            </li>
-          <li>
-            <h5>Venue</h5>
-          </li>
-          <li>
-            <h5>Getting here</h5>
-          </li>
-          <li>
-            <h5>Ticketing</h5>
-          </li>
+          {PageList}
         </ul>
       </div>
     );

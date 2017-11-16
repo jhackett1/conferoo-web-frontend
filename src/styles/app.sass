@@ -57,12 +57,12 @@
 
 // Navbar
 nav
-  background-color: $grey1
-  box-shadow: 0px 2px 5px rgba(0,0,0,0.2)
+  background-color: $white
+  border-bottom: 1px solid $grey2
   position: relative
   z-index: 3
   .container
-    div.logout
+    a.logout
       display: none
     ul
       display: flex
@@ -92,7 +92,7 @@ nav
           fill: $blue
 
 
-@media screen and (min-width: 700px)
+@media screen and (min-width: 500px)
   // Desktop navbar
   nav
     .container
@@ -100,11 +100,13 @@ nav
       flex-direction: row
       justify-content: space-between
       padding: 0px 10px
-      div.logout
+      a.logout
         display: flex
         flex-direction: row
         justify-content: center
         align-items: center
+        position: relative
+        padding: 0px
         p
           color: $grey3
           font-size: 0.9em
@@ -122,15 +124,23 @@ nav
         justify-content: center
         align-items: center
         text-decoration: none
-        padding: 12px 2px
-        margin-right: 40px
+        padding: 12px 15px
+        margin-right: 20px
         border-bottom: 3px solid transparent
         svg
           height: 20px
           width: 20px
-        span
-          margin-left: 15px
-          display: inline
         &.active
           border-bottom: 3px solid $blue
           transform: scale(1)
+
+@media screen and (min-width: 700px)
+  nav
+    .container
+      a
+        margin-right: 40px
+        padding: 12px 2px
+        margin-right: 30px
+        span
+          margin-left: 15px
+          display: inline
