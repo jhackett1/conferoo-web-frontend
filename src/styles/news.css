@@ -17,7 +17,8 @@ ul.news-item-list {
     opacity: 0;
     overflow: hidden;
     border-radius: 4px;
-    border: 1px solid #dfdfdf; }
+    border: 1px solid #dfdfdf;
+    position: relative; }
     ul.news-item-list li.news-item div.poster {
       height: 200px;
       position: relative;
@@ -58,22 +59,35 @@ article.single-update {
   display: flex;
   flex-direction: column;
   top: 0;
+  left: 0;
   animation: slideIn 0.5s cubic-bezier(0.56, 0.01, 0.53, 1);
   box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.6); }
   article.single-update div.header {
-    height: 50px;
+    height: 48px;
     background: #ffffff;
     border-bottom: 1px solid #dfdfdf;
-    display: flex;
-    flex-direction: row;
-    justify-content: flex-start;
     align-items: center;
     color: #969696; }
-    article.single-update div.header i {
-      font-size: 130%;
-      color: #969696;
-      margin: 15px;
-      cursor: pointer; }
+    article.single-update div.header div.container {
+      display: flex;
+      max-width: 770px;
+      height: 100%;
+      flex-direction: row;
+      align-items: center;
+      justify-content: flex-start; }
+      article.single-update div.header div.container span {
+        color: #505050;
+        font-weight: 700;
+        opacity: 0;
+        transition: 0.1s; }
+      article.single-update div.header div.container i {
+        font-size: 150%;
+        color: #969696;
+        margin: 10px 20px 10px 15px;
+        cursor: pointer;
+        transition: 0.2s ease-in; }
+        article.single-update div.header div.container i:hover {
+          transform: translateX(3px); }
   article.single-update div.scrollable-view {
     overflow-y: scroll;
     height: 100%; }
@@ -84,13 +98,30 @@ article.single-update {
     article.single-update div.scrollable-view div.meta {
       padding: 15px; }
       article.single-update div.scrollable-view div.meta h1 {
-        color: #333;
+        color: #505050;
         margin: 5px 0px; }
       article.single-update div.scrollable-view div.meta h5 {
         color: #969696;
         font-weight: 100; }
+    article.single-update div.scrollable-view span.noslides {
+      color: #969696;
+      font-size: 0.9em;
+      font-style: italic; }
+    article.single-update div.scrollable-view button.btn.slides {
+      border-color: #fb6e2a;
+      background-color: #fb6e2a;
+      color: #ffffff; }
+    article.single-update div.scrollable-view div.event-content {
+      padding: 0px 15px 15px 15px;
+      margin-bottom: 20px; }
+      article.single-update div.scrollable-view div.event-content h1, article.single-update div.scrollable-view div.event-content h2, article.single-update div.scrollable-view div.event-content h3 {
+        color: #505050;
+        padding-bottom: 10px; }
     article.single-update div.scrollable-view div.body-content {
       padding: 15px; }
+      article.single-update div.scrollable-view div.body-content h1, article.single-update div.scrollable-view div.body-content h2, article.single-update div.scrollable-view div.body-content h3, article.single-update div.scrollable-view div.body-content h4, article.single-update div.scrollable-view div.body-content h5 {
+        padding-bottom: 10px;
+        color: #505050; }
       article.single-update div.scrollable-view div.body-content p {
         margin-bottom: 20px;
         color: #505050; }
@@ -101,32 +132,53 @@ article.single-update {
             text-decoration: underline; }
 
 @media screen and (min-width: 500px) {
+  ul.news-item-list {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap; }
+    ul.news-item-list li.news-item {
+      margin-right: 10px;
+      width: calc(50% - 5px); }
+      ul.news-item-list li.news-item:nth-of-type(even) {
+        margin-right: 0px; }
+  article.single-update div.header div.container {
+    padding: 0px 25px; }
+    article.single-update div.header div.container i {
+      margin-left: 10px; }
+    article.single-update div.header div.container span {
+      opacity: 1; }
   article.single-update div.scrollable-view {
     overflow-y: scroll;
     height: 100%; }
     article.single-update div.scrollable-view img.poster {
       height: 400px; }
     article.single-update div.scrollable-view div.meta {
-      margin: 15px auto;
-      max-width: 500px; }
+      margin: -115px auto 0px auto;
+      max-width: 500px;
+      position: relative;
+      background-color: #ffffff;
+      padding: 30px; }
       article.single-update div.scrollable-view div.meta h1 {
         font-size: 2em; }
       article.single-update div.scrollable-view div.meta h5 {
         font-size: 0.9em; }
-    article.single-update div.scrollable-view div.body-content {
+    article.single-update div.scrollable-view div.body-content, article.single-update div.scrollable-view div.event-content {
       margin: 0px auto;
-      max-width: 500px; } }
+      max-width: 500px;
+      padding: 30px; } }
 
 @media screen and (min-width: 700px) {
   ul.news-item-list {
     display: flex;
     flex-direction: row;
-    margin: 40px 10px; }
+    margin: 40px 10px;
+    flex-wrap: wrap; }
     ul.news-item-list li.news-item {
       margin-right: 10px;
-      width: 33%;
-      flex: 1; }
-      ul.news-item-list li.news-item:last-of-type {
+      width: calc(33.33% - 8px); }
+      ul.news-item-list li.news-item:nth-of-type(even) {
+        margin-right: 10px; }
+      ul.news-item-list li.news-item:nth-of-type(3n+3) {
         margin-right: 0px; }
       ul.news-item-list li.news-item div.poster {
         height: 200px;
@@ -148,12 +200,12 @@ article.single-update {
     article.single-update div.scrollable-view img.poster {
       height: 500px; }
     article.single-update div.scrollable-view div.meta {
-      max-width: 700px; }
+      max-width: 770px; }
       article.single-update div.scrollable-view div.meta h1 {
         font-size: 3em; }
       article.single-update div.scrollable-view div.meta h5 {
         font-size: 1em; }
-    article.single-update div.scrollable-view div.body-content {
-      max-width: 700px; }
-      article.single-update div.scrollable-view div.body-content p {
+    article.single-update div.scrollable-view div.body-content, article.single-update div.scrollable-view div.event-content {
+      max-width: 770px; }
+      article.single-update div.scrollable-view div.body-content p, article.single-update div.scrollable-view div.event-content p {
         font-size: 1.1em; } }

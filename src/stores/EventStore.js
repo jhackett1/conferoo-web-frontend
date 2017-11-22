@@ -5,12 +5,7 @@ import dispatcher from '../dispatcher';
 class EventsStore extends EventEmitter {
   constructor(){
     super();
-    this.events = [],
-    this.agenda = []
-  }
-
-  getAgenda(){
-    return this.agenda;
+    this.events = []
   }
 
   getEvents(){
@@ -22,15 +17,23 @@ class EventsStore extends EventEmitter {
     this.emit('change');
   }
 
-  fetchAgenda(agenda){
-    this.agenda = agenda;
+  willAttend(eventId){
+    // Search out the right record...
+    var index = this.events.findIndex((event)=>{
+      return event._id === eventId;
+    })
+    // ...and update it
+    this.events[index]['attending'] = true;
     this.emit('change');
+    console.log('store updated with: ', this.events[index])
   }
-
-  // TODO what ahppens when the add to agenda action is dispatched
-  // There should be a little spinner on the button
-  addToAgenda(agenda){
-    // TODO add code here
+  willNotAttend(eventId){
+    // Search out the right record...
+    var index = this.events.findIndex((event)=>{
+      return event._id === eventId;
+    })
+    // ...and update it
+    // this.events[index].attending = false;
     this.emit('change');
   }
 
@@ -39,11 +42,12 @@ class EventsStore extends EventEmitter {
       case "FETCH_EVENTS_SUCCESS": {
         this.fetchEvents(action.events)
       }
-      case "FETCH_AGENDA_SUCCESS": {
-        this.fetchAgenda(action.agenda)
-      }
       case "ADDING_TO_AGENDA_SUCCESS": {
-        this.addToAgenda(action.agenda)
+        this.willAttend(action.eventId)
+        console.log('store case firing')
+      }
+      case "REMOVING_FROM_AGENDA_SUCCESS": {
+        this.willNotAttend(action.eventId)
       }
     }
   }
@@ -52,5 +56,6 @@ class EventsStore extends EventEmitter {
 
 const eventsStore = new EventsStore;
 dispatcher.register(eventsStore.handleActions.bind(eventsStore));
+
 
 export default eventsStore;

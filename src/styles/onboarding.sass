@@ -1,0 +1,71 @@
+@import 'variables.sass'
+
+ul.onboarding-dots
+  display: flex
+  flex-direction: row
+  justify-content: center
+  align-items: center
+  position: fixed
+  bottom: 15px
+  width: 100%
+  a
+    width: 15px
+    height: 15px
+    border-radius: 100%
+    background-color: $grey2
+    display: inline-block
+    margin: 5px
+    transition: 0.1s ease-in
+    &.active
+      background-color: $blue
+
+@keyframes slide
+  0%
+    opacity: 0
+    transform: translateY(20px)
+  100%
+    opacity: 1
+    transform: translateY(0px)
+
+div.onboarding-item
+  height: 100vh
+  display: flex
+  flex-direction: column
+  justify-content: center
+  align-items: center
+  padding: 20px
+  text-align: center
+  opacity: 0
+  animation: slide 0.5s ease-out
+  animation-fill-mode: forwards
+  img
+    max-width: 200px
+    margin-bottom: 20px
+  h2
+    color: $grey4
+    font-size: 2em
+    margin-bottom: 10px
+  p
+    color: $grey3
+  h4
+    color: $grey3
+    margin-top: 20px
+    font-size: 1.4em
+  form
+    display: flex
+    flex-direction: column
+    justify-content: center
+    align-items: center
+    margin-top: 30px
+    width: 100%
+    select
+      background-color: $grey1
+      border: none !important
+      border-radius: 0px
+      padding: 10px
+      font-size: 1em
+      color: $grey4
+      width: 100%
+      margin-bottom: 10px
+  button.btn
+    margin-top: 40px

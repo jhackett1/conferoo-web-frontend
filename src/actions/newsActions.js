@@ -8,7 +8,7 @@ export function fetchNews(){
   })
   // Make API call
   updatesApi.getUpdates((err, response)=>{
-    if(err) return dispatcher.dispatch({type: 'FETCH_NEWS_ERROR'});
+    if(err) return ;
     dispatcher.dispatch({
       type: 'FETCH_NEWS_SUCCESS',
       news: response

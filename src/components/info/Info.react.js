@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { withRouter } from 'react-router-dom';
 import userService from '../../services/userService';
 import '../../styles/info.css';
+import FeedbackModal from '../partials/FeedbackModal.react';
 
 // Flux stuff
 import infoStore from '../../stores/InfoStore';
@@ -11,11 +12,17 @@ class Info extends Component {
   constructor(){
     super();
     this.state = {
-      pages: infoStore.getAll()
+      pages: infoStore.getAll(),
+      selected: '',
+      userProfile: userService.getProfile(),
+      modalVisible: false
     }
   }
 
   componentWillMount(){
+    // Fetch info when view is nagivated to
+    infoActions.fetchInfo();
+    // Subscribe state to changes in store
     infoStore.on('change', ()=>{
       this.setState({
         pages: infoStore.getAll()
@@ -23,31 +30,49 @@ class Info extends Component {
     })
   }
 
+  closeModal = () => {
+    this.setState({
+      modalVisible: false
+    })
+  }
+
   render() {
 
     const LogOut = withRouter(({ history }) => (
-      <li onClick={() => {
+      <li className="info-item action" onClick={() => {
         userService.removeToken();
         history.push('/login');
       }}><h5>Log out</h5></li>
     ))
 
+    const Feedback = () => (
+      <li className="info-item action" onClick={() => {
+        this.setState({
+          modalVisible: true
+        })
+      }}><h5>Something not working?</h5></li>
+    )
+
     const UserProfile = () => (
       <div className="user-profile">
         <div>
-          <h5>{this.props.profile.displayname}</h5>
-          <p>{this.props.profile.email}</p>
+          <h5>{this.state.userProfile.displayName}</h5>
+          <p>{this.state.userProfile.email}</p>
         </div>
-        <img src={this.props.profile.image ? this.props.profile.image : '/user.png'}/>
+        <img src={this.state.userProfile.image ? this.state.userProfile.image : '/user.png'}/>
       </div>
     );
 
     const PageList = this.state.pages.map((pageItem, i)=>{
       return(
-          <li key={pageItem._id}>
-            <div>
-              <h5>{pageItem.title}</h5>
-            </div>
+          <li className={(this.state.selected === i)? 'active info-item' : 'info-item'} key={pageItem._id} onClick={()=>{
+            this.setState({
+              selected: i,
+              modalVisible: false
+            })
+          }}>
+            <h5>{pageItem.title}</h5>
+            <article dangerouslySetInnerHTML={{__html: pageItem.content}}></article>
           </li>
       )
     })
@@ -55,10 +80,12 @@ class Info extends Component {
     return (
       <div className="container">
         <ul className="info-list">
-
-          <LogOut/>
+          <UserProfile/>
           {PageList}
+          <Feedback/>
+          <LogOut/>
         </ul>
+        <FeedbackModal show={this.state.modalVisible} close={this.closeModal}/>
       </div>
     );
   }

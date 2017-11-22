@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import Spinner from '../partials/Spinner.react';
-import SingleNewsMobile from './SingleNewsMobile.react';
+import SingleNews from './SingleNews.react';
 import '../../styles/news.css';
 
 // Flux stuff
@@ -20,6 +20,9 @@ class NewsFeed extends Component{
 
   // Load list of updates from server
   componentWillMount(){
+    // Load new data on nagivating to view
+    newsActions.fetchNews();
+    // Subscribe state to store changes
     newsStore.on('change', ()=>{
       this.setState({
         news: newsStore.getAll(),
@@ -40,7 +43,14 @@ class NewsFeed extends Component{
       var animStyle = {
         animationDelay: i*0.2 + 's'
       }
-      let image = `url(${newsItem.image})`;
+
+      let image;
+      if(newsItem.medium){
+        image = `url(${newsItem.medium})`;
+      } else {
+        image = `url(${newsItem.image})`;
+      }
+
       return(
         <li style={animStyle} key={newsItem._id} className="news-item" onClick={()=>{
           this.setState({
@@ -58,7 +68,7 @@ class NewsFeed extends Component{
     const Single = () => {
       if(this.state.singleNews.content){
         return(
-          <SingleNewsMobile key="2" update={this.state.singleNews} close={this.closeSingleView}/>
+          <SingleNews update={this.state.singleNews} close={this.closeSingleView}/>
         )
       } else {
         return null;

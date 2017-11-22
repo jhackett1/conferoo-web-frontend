@@ -4,23 +4,15 @@ import userService from './userService';
 
 const host = config.api_host;
 
-const updatesApi = {
+const speakerApi = {
 
-  respond: function(id, option, email, cb){
-
-
-
+  // Retrieve all posts from the server
+  getSpeakers: function(cb){
     Axios({
-      method: 'post',
-      url: host + 'polls/' + id + '/respond',
+      method: 'get',
+      url: host + 'speakers/',
       headers: {
         Authorization: userService.getToken()
-      },
-      data: {
-        response: {
-            option: option,
-            email: email
-          }
       }
     })
       .then(function(response){
@@ -32,20 +24,16 @@ const updatesApi = {
   },
 
   // Retrieve all posts from the server
-  getPolls: function(cb){
+  getSingleSpeaker: function(id, cb){
     Axios({
       method: 'get',
-      url: host + 'polls/',
+      url: host + 'speakers/' + id,
       headers: {
         Authorization: userService.getToken()
       }
     })
       .then(function(response){
-        // Filter the response to hide posts that are not flagged as public
-        var processedData = response.data.filter(function(poll){
-          return poll.published !== 'private';
-        })
-        cb(null, processedData)
+        cb(null, response.data)
       })
       .catch(function(err){
         cb(err, null)
@@ -54,4 +42,4 @@ const updatesApi = {
 
 }
 
-export default updatesApi;
+export default speakerApi;

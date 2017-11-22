@@ -1,0 +1,42 @@
+@import 'variables.sass'
+
+ul.poll-items-list
+  padding: 10px
+  list-style-type: none
+  li.poll-item
+    margin-bottom: 10px
+    border: 1px solid $grey2
+    border-radius: 4px
+    padding: 15px
+    opacity: 0
+    animation: fadeInUp 0.2s ease-out
+    animation-fill-mode: forwards
+    h3
+      font-size: 1.4em
+      color: $grey4
+      margin-bottom: 5px
+    p
+      color: $grey3
+      font-size: 0.9em
+    h5
+      color: $grey3
+      font-size: 0.9em
+      margin-top: 15px
+      font-weight: 100
+    form
+      display: flex
+      flex-direction: column
+      input
+        padding: 10px
+        font-size: 1em
+        border: none
+        margin-top: 15px
+        background-color: $grey1
+    button.btn
+      width: 140px
+      margin-right: 20px
+
+
+@media screen and (min-width: 700px)
+  ul.poll-items-list
+    margin-top: 30px

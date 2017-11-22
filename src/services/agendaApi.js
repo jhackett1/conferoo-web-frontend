@@ -6,17 +6,15 @@ const host = config.api_host;
 
 const agendaApi = {
 
-  // Add a new event to agenda
-  addToAgenda: function(eventId, cb){
+  // Update the agenda
+  updateAgenda: function(newAgenda, cb){
     Axios({
-      method: 'post',
+      method: 'put',
       url: host + 'agenda/',
       headers: {
         Authorization: userService.getToken()
       },
-      data: {
-        event: eventId
-      }
+      data: newAgenda
     })
       .then(function(response){
         cb(null, response.data)
@@ -26,27 +24,7 @@ const agendaApi = {
       })
   },
 
-  // Remove event from agenda
-  removeFromAgenda: function(eventId, cb){
-    Axios({
-      method: 'delete',
-      url: host + 'agenda',
-      headers: {
-        Authorization: userService.getToken()
-      },
-      data: {
-        event: eventId
-      }
-    })
-      .then(function(response){
-        cb(null, response.data)
-      })
-      .catch(function(err){
-        cb(err, null)
-      })
-  },
-
-  // Remove event from agenda
+  // Return user's agenda array
   listAgenda: function(cb){
     Axios({
       method: 'get',

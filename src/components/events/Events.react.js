@@ -1,42 +1,53 @@
 import React, { Component } from 'react';
 import { Route, NavLink } from 'react-router-dom';
 import '../../styles/events.css';
+import '../../styles/news.css';
 import Browse from './Browse.react';
 import Agenda from './Agenda.react';
-import Spinner from '../partials/Spinner.react';
-
-// Flux
-import eventStore from '../../stores/EventStore';
-import * as eventActions from '../../actions/eventsActions';
+import SingleEvent from './SingleEvent.react';
 
 class Events extends Component{
   constructor(){
     super();
     this.state = {
-      events: eventStore.getEvents(),
-      agenda: eventStore.getAgenda()
+      id: false
     }
   }
 
-  // On render, load in data from server
-  componentWillMount(){
-    eventStore.on('change', ()=>{
-      this.setState({
-        events: eventStore.getEvents(),
-        agenda: eventStore.getAgenda()
-      })
+  showSingle = (id) => {
+    this.setState({
+      id: id
+    })
+  }
+
+  // Method to close single article view
+  closeSingleView = () => {
+    this.setState({
+      id: false
     })
   }
 
   render(){
+      // Render the single event detail view
+      const Single = () => {
+        if(this.state.id){
+          return(
+            <SingleEvent id={this.state.id} close={this.closeSingleView}/>
+          )
+        } else {
+          return null;
+        }
+      }
+
     return(
       <div className="container">
         <ul className="sub-nav">
           <NavLink exact to="/events">Browse events</NavLink>
           <NavLink to="/events/agenda">My agenda</NavLink>
         </ul>
-        <Route path="/events/agenda" render={() => <Agenda events={this.state.agenda} />}/>
-        <Route exact path="/events" render={() => <Browse events={this.state.events} />}/>
+        <Route path="/events/agenda" render={() => <Agenda showSingle={this.showSingle} />}/>
+        <Route exact path="/events" render={() => <Browse showSingle={this.showSingle} />}/>
+        <Single/>
       </div>
     )
   }

@@ -8,9 +8,12 @@ const eventsApi = {
 
   // Retrieve all posts from the server
   getEvents: function(cb){
+    // Get the locally stored user profile
+    let profile = userService.getProfile();
+
     Axios({
       method: 'get',
-      url: host + 'events/',
+      url: host + 'events?programme=' + profile.programme,
       headers: {
         Authorization: userService.getToken()
       }

@@ -14,6 +14,7 @@ ul.news-item-list
     overflow: hidden
     border-radius: 4px
     border: 1px solid $grey2
+    position: relative
     div.poster
       height: 200px
       position: relative
@@ -55,22 +56,35 @@ article.single-update
   display: flex
   flex-direction: column
   top: 0
+  left: 0
   animation: slideIn 0.5s cubic-bezier(.56,.01,.53,1)
   box-shadow: 0px 0px 10px rgba(0,0,0,0.6)
   div.header
-    height: 50px
+    height: 48px
     background: $white
     border-bottom: 1px solid $grey2
-    display: flex
-    flex-direction: row
-    justify-content: flex-start
     align-items: center
     color: $grey3
-    i
-      font-size: 130%
-      color: $grey3
-      margin: 15px
-      cursor: pointer
+    div.container
+      display: flex
+      max-width: 770px
+      height: 100%
+      flex-direction: row
+      align-items: center
+      justify-content: flex-start
+      span
+        color: $grey4
+        font-weight: 700
+        opacity: 0
+        transition: 0.1s
+      i
+        font-size: 150%
+        color: $grey3
+        margin: 10px 20px 10px 15px
+        cursor: pointer
+        transition: 0.2s ease-in
+        &:hover
+          transform: translateX(3px)
   div.scrollable-view
     overflow-y: scroll
     height: 100%
@@ -81,13 +95,32 @@ article.single-update
     div.meta
       padding: 15px
       h1
-        color: $grey5
+        color: $grey4
         margin: 5px 0px
       h5
         color: $grey3
         font-weight: 100
+    span.noslides
+      color: $grey3
+      font-size: 0.9em
+      font-style: italic
+    button.btn.slides
+      border-color: $orange
+      background-color: $orange
+      color: $white
+
+    div.event-content
+      padding: 0px 15px 15px 15px
+      margin-bottom: 20px
+      h1, h2, h3
+        color: $grey4
+        padding-bottom: 10px
+
     div.body-content
       padding: 15px
+      h1, h2, h3, h4, h5
+        padding-bottom: 10px
+        color: $grey4
       p
         margin-bottom: 20px
         color: $grey4
@@ -99,22 +132,43 @@ article.single-update
 
 
 @media screen and (min-width: 500px)
+  ul.news-item-list
+    display: flex
+    flex-direction: row
+    flex-wrap: wrap
+    li.news-item
+      margin-right: 10px
+      width: calc(50% - 5px)
+      &:nth-of-type(even)
+        margin-right: 0px
+
   article.single-update
+    div.header
+      div.container
+        padding: 0px 25px
+        i
+          margin-left: 10px
+        span
+          opacity: 1
     div.scrollable-view
       overflow-y: scroll
       height: 100%
       img.poster
         height: 400px
       div.meta
-        margin: 15px auto
+        margin: -115px auto 0px auto
         max-width: 500px
+        position: relative
+        background-color: $white
+        padding: 30px
         h1
           font-size: 2em
         h5
           font-size: 0.9em
-      div.body-content
+      div.body-content, div.event-content
         margin: 0px auto
         max-width: 500px
+        padding: 30px
 
 @media screen and (min-width: 700px)
 
@@ -122,11 +176,13 @@ article.single-update
     display: flex
     flex-direction: row
     margin: 40px 10px
+    flex-wrap: wrap
     li.news-item
       margin-right: 10px
-      width: 33%
-      flex: 1
-      &:last-of-type
+      width: calc(33.33% - 8px)
+      &:nth-of-type(even)
+        margin-right: 10px
+      &:nth-of-type(3n+3)
         margin-right: 0px
       div.poster
         height: 200px
@@ -150,12 +206,12 @@ article.single-update
       img.poster
         height: 500px
       div.meta
-        max-width: 700px
+        max-width: 770px
         h1
           font-size: 3em
         h5
           font-size: 1em
-      div.body-content
-        max-width: 700px
+      div.body-content, div.event-content
+        max-width: 770px
         p
           font-size: 1.1em

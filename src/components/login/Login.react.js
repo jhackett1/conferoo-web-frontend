@@ -1,7 +1,15 @@
 import React, { Component } from 'react';
 import config from '../../config';
+import FeedbackModal from '../partials/FeedbackModal.react';
+
 
 class Login extends Component {
+  constructor(){
+    super();
+    this.state = {
+      modalVisible: false
+    }
+  }
 
   //Send user to Google on click
   handleClick(){
@@ -12,12 +20,23 @@ class Login extends Component {
     window.location.href = url;
   }
 
+  closeModal = () => {
+    this.setState({
+      modalVisible: false
+    })
+  }
+
   render() {
     return (
       <div className="login-box">
               <p className="login-info">Use your <strong>@faststream.civilservice.gov.uk</strong> account to see info and updates about the conference, answer polls and send in questons.</p>
-              <a onClick={this.handleClick} className="btn"><span className="fa fa-google"></span>Log in with Google</a>
-              <a className="login-trouble">Having trouble?</a>
+              <button onClick={this.handleClick} className="btn filled"><i className="fa fa-google"></i> Log in with Google</button>
+              <a className="login-trouble" onClick={()=>{
+                this.setState({
+                  modalVisible: true
+                })
+              }}>Having trouble?</a>
+              <FeedbackModal show={this.state.modalVisible} handleClose={this.closeModal}/>
       </div>
     );
   }

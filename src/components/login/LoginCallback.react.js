@@ -4,6 +4,13 @@ import config from '../../config';
 import userService from '../../services/userService';
 import Spinner from '../partials/Spinner.react';
 
+// Flux
+import * as newsActions from '../../actions/newsActions';
+import * as eventsActions from '../../actions/eventsActions';
+import * as agendaActions from '../../actions/agendaActions';
+import * as pollActions from '../../actions/pollActions';
+import * as infoActions from '../../actions/infoActions';
+
 class LoginCallback extends Component {
   // Initial state
   constructor(props){
@@ -27,9 +34,24 @@ class LoginCallback extends Component {
           data = JSON.parse(request.responseText);
           userService.saveToken(data.token);
           userService.saveProfile(data);
-          this.setState({
-            redirect: '/'
-          })
+          // Now we have a token, make an initial call to the server for all data
+          newsActions.fetchNews();
+          eventsActions.fetchEvents();
+          agendaActions.fetchAgenda();
+          pollActions.fetchPolls();
+          infoActions.fetchInfo();
+          // And redirect us
+
+          // Is the user logging in for the first time?
+          if (data.onboarded === true) {
+            this.setState({
+              redirect: '/'
+            })
+          } else {
+            this.setState({
+              redirect: '/onboarding'
+            })
+          }
         // If authentication fails
         } else if(status===401) {
           data = JSON.parse(request.responseText);

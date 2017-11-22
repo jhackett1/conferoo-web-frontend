@@ -2,17 +2,43 @@
 
 ul.info-list
   list-style-type: none
-  li
+
+  li.info-item.action h5
+    color: $blue
+    font-weight: 100
+
+  li.info-item
     padding: 15px
     border-bottom: 1px solid $grey2
     align-items: center
     cursor: pointer
+    max-height: 55px
+    overflow: hidden
+    transition: 0.5s
     h5
-      font-weight: 100
       font-size: 1.2em
       color: $grey4
-    p
-      display: none
+    article
+      opacity: 0
+      transition: 0.3s
+      margin-top: 20px
+      color: $grey4
+      font-size: 0.9em
+      p, ul
+        margin-bottom: 15px
+      li
+        margin-left: 20px
+      a
+        color: $blue
+        text-decoration: none
+        &:hover
+          text-decoration: underline
+    &.active
+      max-height: 3000px
+      cursor: auto
+      article
+        opacity: 1
+
   div.user-profile
     padding: 15px
     display: flex
@@ -24,7 +50,7 @@ ul.info-list
     h5
       font-size: 1.5em
       font-weight: 400
-      color: $grey4
+      color: $grey5
     p
       font-size: 0.8em
       color: $grey3
@@ -37,19 +63,15 @@ ul.info-list
 
   ul.info-list
     margin: 40px 10px
-    li
-      background-color: $grey1
-      border-bottom: none
+    li.info-item
+      border: 1px solid $grey1
+      border-radius: 4px
       margin-bottom: 10px
       h5
-        font-weight: 100
+        font-weight: 700
         font-size: 1.2em
-        color: #505050
-      p
-        display: inline
-        font-size: 0.8em
-        color: $grey3
-
+      &.active
+        border-color: $grey2
     div.user-profile
       margin-bottom: 40px
       h5

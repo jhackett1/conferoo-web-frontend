@@ -18,9 +18,9 @@ class LogoutButton extends Component{
 
   render(){
     return(
-      <Link to='/info' class="logout">
-        <p>{this.state.profile.displayname}</p>
-        <img alt={this.state.profile.displayname} src={this.state.profile.image ? this.state.profile.image : '/user.png'}/>
+      <Link to='/info' className="logout">
+        <p>{this.state.profile.displayName}</p>
+        <img alt={this.state.profile.displayName} src={this.state.profile.image ? this.state.profile.image : '/user.png'}/>
       </Link>
     );
   }

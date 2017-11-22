@@ -8,17 +8,40 @@
 
 ul.info-list {
   list-style-type: none; }
-  ul.info-list li {
+  ul.info-list li.info-item.action h5 {
+    color: #4a6bf6;
+    font-weight: 100; }
+  ul.info-list li.info-item {
     padding: 15px;
     border-bottom: 1px solid #dfdfdf;
     align-items: center;
-    cursor: pointer; }
-    ul.info-list li h5 {
-      font-weight: 100;
+    cursor: pointer;
+    max-height: 55px;
+    overflow: hidden;
+    transition: 0.5s; }
+    ul.info-list li.info-item h5 {
       font-size: 1.2em;
       color: #505050; }
-    ul.info-list li p {
-      display: none; }
+    ul.info-list li.info-item article {
+      opacity: 0;
+      transition: 0.3s;
+      margin-top: 20px;
+      color: #505050;
+      font-size: 0.9em; }
+      ul.info-list li.info-item article p, ul.info-list li.info-item article ul {
+        margin-bottom: 15px; }
+      ul.info-list li.info-item article li {
+        margin-left: 20px; }
+      ul.info-list li.info-item article a {
+        color: #4a6bf6;
+        text-decoration: none; }
+        ul.info-list li.info-item article a:hover {
+          text-decoration: underline; }
+    ul.info-list li.info-item.active {
+      max-height: 3000px;
+      cursor: auto; }
+      ul.info-list li.info-item.active article {
+        opacity: 1; }
   ul.info-list div.user-profile {
     padding: 15px;
     display: flex;
@@ -30,7 +53,7 @@ ul.info-list {
     ul.info-list div.user-profile h5 {
       font-size: 1.5em;
       font-weight: 400;
-      color: #505050; }
+      color: #333; }
     ul.info-list div.user-profile p {
       font-size: 0.8em;
       color: #969696; }
@@ -42,18 +65,15 @@ ul.info-list {
 @media screen and (min-width: 700px) {
   ul.info-list {
     margin: 40px 10px; }
-    ul.info-list li {
-      background-color: #f6f6f6;
-      border-bottom: none;
+    ul.info-list li.info-item {
+      border: 1px solid #f6f6f6;
+      border-radius: 4px;
       margin-bottom: 10px; }
-      ul.info-list li h5 {
-        font-weight: 100;
-        font-size: 1.2em;
-        color: #505050; }
-      ul.info-list li p {
-        display: inline;
-        font-size: 0.8em;
-        color: #969696; }
+      ul.info-list li.info-item h5 {
+        font-weight: 700;
+        font-size: 1.2em; }
+      ul.info-list li.info-item.active {
+        border-color: #dfdfdf; }
     ul.info-list div.user-profile {
       margin-bottom: 40px; }
       ul.info-list div.user-profile h5 {
