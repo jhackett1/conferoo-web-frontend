@@ -17,6 +17,26 @@ ul.poll-items-list {
     opacity: 0;
     animation: fadeInUp 0.2s ease-out;
     animation-fill-mode: forwards; }
+    ul.poll-items-list li.poll-item ul.responses {
+      list-style-type: none; }
+      ul.poll-items-list li.poll-item ul.responses li div {
+        display: block;
+        border-radius: 4px;
+        margin-top: 3px;
+        padding: 7px;
+        background-color: #4a6bf6;
+        color: #ffffff;
+        min-width: 50px;
+        animation: grow 0.5s ease-in-out;
+        transform-origin: left; }
+        ul.poll-items-list li.poll-item ul.responses li div.winner {
+          background-color: #fb6e2a; }
+
+@keyframes grow {
+  0% {
+    transform: scaleX(0); }
+  100% {
+    transform: scaleX(1); } }
     ul.poll-items-list li.poll-item h3 {
       font-size: 1.4em;
       color: #505050;

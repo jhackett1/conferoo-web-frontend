@@ -1,5 +1,6 @@
 import React, {Component} from 'react';
 import userService from '../../services/userService';
+import Responses from './Responses.react';
 
 import Humandate from 'human-date';
 
@@ -18,7 +19,7 @@ class MultipleChoicePoll extends Component {
   checkUserResponses = () => {
     for (var key in this.props.poll.responses) {
       if (!this.props.poll.responses.hasOwnProperty(key)) {
-          continue;
+        continue;
       }
       if(this.props.poll.responses[key].includes(userService.getProfile().email)){
         this.setState({
@@ -28,16 +29,14 @@ class MultipleChoicePoll extends Component {
     }
   }
 
-  componentWillMount(){
-    this.checkUserResponses();
+  componentDidMount(){
+    pollStore.on('change', ()=>{
+      this.checkUserResponses()
+    })
   }
 
 
   render(){
-
-    pollStore.on('change', ()=>{
-      this.checkUserResponses()
-    })
 
     const PollOption = (props) => (
       <button
@@ -60,7 +59,7 @@ class MultipleChoicePoll extends Component {
         <div>
           <h3>{this.props.poll.question}</h3>
           <p>{this.props.poll.detail}</p>
-          You've already voted in this poll.
+          <Responses responses={this.props.poll.responses} options={this.props.poll.options}/>
           <h5>Started {Humandate.relativeTime(this.props.poll.createdAt)}</h5>
         </div>
 

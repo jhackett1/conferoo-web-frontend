@@ -8,8 +8,6 @@ const updatesApi = {
 
   respond: function(id, option, email, cb){
 
-
-
     Axios({
       method: 'post',
       url: host + 'polls/' + id + '/respond',
@@ -33,6 +31,7 @@ const updatesApi = {
 
   // Retrieve all posts from the server
   getPolls: function(cb){
+    console.log('API client called')
     Axios({
       method: 'get',
       url: host + 'polls/',

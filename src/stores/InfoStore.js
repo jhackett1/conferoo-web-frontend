@@ -19,9 +19,12 @@ class InfoStore extends EventEmitter {
 
   handleActions(action){
     switch(action.type){
-      case "FETCH_INFO_SUCCESS": {
+      case "FETCH_INFO_SUCCESS":
         this.fetchInfo(action.info);
-      }
+        break;
+
+      default:
+        break;
     }
   }
 

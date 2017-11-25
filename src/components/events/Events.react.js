@@ -6,6 +6,8 @@ import Browse from './Browse.react';
 import Agenda from './Agenda.react';
 import SingleEvent from './SingleEvent.react';
 
+import * as eventActions from '../../actions/eventsActions';
+
 class Events extends Component{
   constructor(){
     super();

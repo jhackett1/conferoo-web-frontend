@@ -19,9 +19,12 @@ class SpeakerStore extends EventEmitter {
 
   handleActions(action){
     switch(action.type){
-      case "FETCH_SPEAKERS_SUCCESS": {
+      case "FETCH_SPEAKERS_SUCCESS":
         this.fetchSpeakers(action.speakers)
-      }
+        break;
+
+      default:
+        break;
     }
   }
 

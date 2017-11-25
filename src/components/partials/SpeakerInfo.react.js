@@ -15,7 +15,7 @@ class SpeakerInfo extends Component {
 
   componentWillMount(){
     // Fetch new server data on route load
-    speakerActions.fetchSpeakers();
+    speakerActions.fetchSpeakers(this.props.history);
     // Subscribe state to store changes
     speakerStore.on('change', ()=>{
       this.setState({

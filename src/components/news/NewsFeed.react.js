@@ -22,6 +22,7 @@ class NewsFeed extends Component{
   componentWillMount(){
     // Load new data on nagivating to view
     newsActions.fetchNews();
+
     // Subscribe state to store changes
     newsStore.on('change', ()=>{
       this.setState({

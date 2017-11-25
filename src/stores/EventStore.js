@@ -46,9 +46,12 @@ class EventsStore extends EventEmitter {
         this.willAttend(action.eventId)
         console.log('store case firing')
       }
-      case "REMOVING_FROM_AGENDA_SUCCESS": {
+      case "REMOVING_FROM_AGENDA_SUCCESS":
         this.willNotAttend(action.eventId)
-      }
+        break;
+
+      default:
+        break;
     }
   }
 

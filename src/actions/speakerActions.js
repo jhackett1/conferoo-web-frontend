@@ -8,7 +8,7 @@ export function fetchSpeakers(){
   })
   // Make API call
   speakerApi.getSpeakers((err, response)=>{
-    if(err) return dispatcher.dispatch({type: 'FETCH_SPEAKERS_ERROR'});
+    if(err) return;
     dispatcher.dispatch({
       type: 'FETCH_SPEAKERS_SUCCESS',
       speakers: response

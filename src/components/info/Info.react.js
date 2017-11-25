@@ -85,7 +85,7 @@ class Info extends Component {
           <Feedback/>
           <LogOut/>
         </ul>
-        <FeedbackModal show={this.state.modalVisible} close={this.closeModal}/>
+        <FeedbackModal show={this.state.modalVisible} handleClose={this.closeModal}/>
       </div>
     );
   }

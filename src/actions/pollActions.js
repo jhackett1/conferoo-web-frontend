@@ -3,13 +3,13 @@ import pollsApi from '../services/pollsApi';
 import userService from '../services/userService'
 
 export function fetchPolls(){
-  // Fire initial event
+  console.log('fetch polls action firing')
+  // // Fire initial event
   dispatcher.dispatch({
     type: 'FETCHING_POLLS'
   })
   // Make API call
   pollsApi.getPolls((err, response)=>{
-    if(err) return dispatcher.dispatch({type: 'FETCH_POLLS_ERROR'});
     dispatcher.dispatch({
       type: 'FETCH_POLLS_SUCCESS',
       polls: response
@@ -18,6 +18,7 @@ export function fetchPolls(){
 };
 
 export function respondToPoll(id, option){
+  console.log('respond to poll action firing')
   dispatcher.dispatch({
     type: 'RESPONDING_TO_POLL'
   })

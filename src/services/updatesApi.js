@@ -2,6 +2,7 @@ import Axios from 'axios';
 import config from '../config';
 import userService from './userService';
 
+
 const host = config.api_host;
 
 const updatesApi = {

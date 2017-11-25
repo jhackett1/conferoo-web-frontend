@@ -1,7 +1,7 @@
 import dispatcher from '../dispatcher';
 import agendaApi from '../services/agendaApi';
 
-export function fetchAgenda(){
+export function fetchAgenda(alert){
   // Fire initial event
   dispatcher.dispatch({
     type: 'FETCHING_AGENDA'

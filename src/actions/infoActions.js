@@ -8,7 +8,7 @@ export function fetchInfo(){
   })
   // Make API call
   pageApi.getList((err, response)=>{
-    if(err) return dispatcher.dispatch({type: 'FETCH_INFO_ERROR'});
+    if(err) return;
     dispatcher.dispatch({
       type: 'FETCH_INFO_SUCCESS',
       info: response

@@ -25,9 +25,12 @@ class NewsStore extends EventEmitter {
 
   handleActions(action){
     switch(action.type){
-      case "FETCH_NEWS_SUCCESS": {
+      case "FETCH_NEWS_SUCCESS":
         this.fetchNews(action.news);
-      }
+        break;
+
+      default:
+        break;
     }
   }
 

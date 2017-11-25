@@ -40,9 +40,7 @@ class FeedbackModal extends Component{
         }
       ]
     }
-
-    console.log(message)
-
+    let closeMethod = this.props.handleClose;
     // Make the POST request to Slack
     Axios({
       method: 'post',
@@ -51,7 +49,7 @@ class FeedbackModal extends Component{
     })
       .then(function(response){
         // TOAST and close
-        this.props.handleClose()
+        closeMethod()
       })
       .catch(function(err){
         console.log(err)
@@ -64,9 +62,10 @@ class FeedbackModal extends Component{
     if(this.props.show){
       return (
         <section className="feedback modal">
+          <i className="fa fa-close" onClick={this.props.handleClose}></i>
           <form onSubmit={this.handleSubmit}>
             <input name="situation" onChange={this.handleChange} value={this.state.situation} type="text" placeholder="What were you doing?"></input>
-            <input name="problem"  onChange={this.handleChange} value={this.state.problem} type="text" placeholder="What went wrong?"></input>
+            <input name="problem" onChange={this.handleChange} value={this.state.problem} type="text" placeholder="What went wrong?"></input>
             <button className="btn" type="submit">Send</button>
           </form>
         </section>

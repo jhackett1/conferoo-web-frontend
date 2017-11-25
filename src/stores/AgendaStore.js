@@ -25,9 +25,12 @@ class AgendaStore extends EventEmitter {
       case "ADD_TO_AGENDA_SUCCESS": {
         this.fetchAgenda(action.agenda)
       }
-      case "REMOVING_FROM_AGENDA_SUCCESS": {
+      case "REMOVING_FROM_AGENDA_SUCCESS":
         this.fetchAgenda(action.agenda)
-      }
+        break;
+
+      default:
+        break;
     }
   }
 

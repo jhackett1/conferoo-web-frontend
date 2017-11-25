@@ -8,7 +8,7 @@ export function fetchEvents(){
   })
   // Make API call
   eventsApi.getEvents((err, response)=>{
-    if(err) return dispatcher.dispatch({type: 'FETCH_EVENTS_ERROR'});
+    if(err) return;
     dispatcher.dispatch({
       type: 'FETCH_EVENTS_SUCCESS',
       events: response
