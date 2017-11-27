@@ -3,6 +3,7 @@ import { Switch, BrowserRouter as Router, Route, Redirect } from 'react-router-d
 import './styles/app.css';
 import userService from './services/userService';
 
+
 // Get top-level views
 import NewsFeed from './components/news/NewsFeed.react';
 import Events from './components/events/Events.react';
@@ -25,17 +26,19 @@ import * as pollActions from './actions/pollActions';
 import * as infoActions from './actions/infoActions';
 import * as speakerActions from './actions/speakerActions';
 
+import usersApi from './services/usersApi';
+
 class App extends Component {
 
   // Load in data on initial application load
   componentWillMount(){
     if (userService.checkToken()) {
-      newsActions.fetchNews();
-      eventsActions.fetchEvents();
-      agendaActions.fetchAgenda();
-      pollActions.fetchPolls();
-      infoActions.fetchInfo();
-      speakerActions.fetchSpeakers();
+        newsActions.fetchNews();
+        eventsActions.fetchEvents();
+        agendaActions.fetchAgenda();
+        pollActions.fetchPolls();
+        infoActions.fetchInfo();
+        speakerActions.fetchSpeakers();
     }
   }
 

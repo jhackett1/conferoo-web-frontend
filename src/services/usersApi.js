@@ -22,6 +22,22 @@ const usersApi = {
       .catch(function(err){
         cb(err, null)
       })
+  },
+
+  getMe: function(cb){
+    Axios({
+      method: 'get',
+      url: host + 'users/me',
+      headers: {
+        Authorization: userService.getToken()
+      }
+    })
+      .then(function(response){
+        cb(null, response.data)
+      })
+      .catch(function(err){
+        cb(err, null)
+      })
   }
 
 }

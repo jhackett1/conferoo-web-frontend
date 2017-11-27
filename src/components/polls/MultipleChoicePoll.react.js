@@ -57,6 +57,7 @@ class MultipleChoicePoll extends Component {
       return(
         <li style={animStyle} key={this.props.poll._id} className="poll-item multiple">
         <div>
+        {this.state.userHasResponded}
           <h3>{this.props.poll.question}</h3>
           <p>{this.props.poll.detail}</p>
           <Responses responses={this.props.poll.responses} options={this.props.poll.options}/>
@@ -65,10 +66,11 @@ class MultipleChoicePoll extends Component {
 
         </li>
       );
-    }else{
+    } else {
       return(
         <li style={animStyle} key={this.props.poll._id} className="poll-item multiple">
           <div>
+                  {this.state.userHasResponded}
             <h3>{this.props.poll.question}</h3>
             <p>{this.props.poll.detail}</p>
             {(this.props.poll.options.a) ? <PollOption id={this.props.poll._id} opt="a" val={this.props.poll.options.a}/> : null}

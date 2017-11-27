@@ -16,20 +16,21 @@ class NewsFeed extends Component{
       loading: newsStore.getLoading(),
       singleNews: {}
     }
+    console.log("FUCK", this.state.news)
   }
 
   // Load list of updates from server
   componentWillMount(){
-    // Load new data on nagivating to view
-    newsActions.fetchNews();
-
-    // Subscribe state to store changes
-    newsStore.on('change', ()=>{
-      this.setState({
-        news: newsStore.getAll(),
-        loading: newsStore.getLoading()
+      // Load new data on nagivating to view
+      newsActions.fetchNews();
+      // Subscribe state to store changes
+      newsStore.on('change', ()=>{
+        this.setState({
+          news: newsStore.getAll(),
+          loading: newsStore.getLoading()
+        })
+            console.log("FUCK", this.state.news)
       })
-    })
   }
 
   // Method to close single article view
@@ -66,6 +67,15 @@ class NewsFeed extends Component{
       )
     })
 
+    const NoResults = () => {
+      return (
+        <div className="message">
+          <h2>There's nothing here</h2>
+          <p>There's no news to see right now. Try again later.</p>
+        </div>
+      )
+    }
+
     const Single = () => {
       if(this.state.singleNews.content){
         return(
@@ -80,10 +90,10 @@ class NewsFeed extends Component{
       <div>
         <div className="container">
           <ul className="news-item-list">
-            {NewsList}
+            {(this.state.news.length > 0) ? NewsList : <Spinner isLoading={this.state.loading}/>}
           </ul>
         </div>
-        <Spinner isLoading={this.state.loading}/>
+
         <Single />
       </div>
     )

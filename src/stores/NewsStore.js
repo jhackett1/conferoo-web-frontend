@@ -18,7 +18,11 @@ class NewsStore extends EventEmitter {
   }
 
   fetchNews(news){
-    this.news = news;
+    if (news === null) {
+          this.news = [];
+    } else {
+          this.news = news;
+    }
     this.loading = false;
     this.emit('change');
   }
