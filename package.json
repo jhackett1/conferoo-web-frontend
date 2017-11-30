@@ -8,6 +8,7 @@
     "flux-dispatcher": "^1.1.5",
     "human-date": "^1.4.0",
     "jquery": "^3.2.1",
+    "node-sass-chokidar": "0.0.3",
     "npm-run-all": "^4.1.2",
     "react": "^16.1.0",
     "react-dom": "^16.1.0",
